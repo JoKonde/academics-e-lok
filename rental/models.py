@@ -53,10 +53,14 @@ class Contact(models.Model):
     dateEnreg = models.DateField(auto_now_add=True)
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
+    objects = models.Manager()
+
 class Role(models.Model):
     roleName = models.CharField(max_length=255)
     dateEnreg = models.DateField(auto_now_add=True)
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+
+    objects = models.Manager()
 
 class Engine(models.Model):
     marque = models.CharField(max_length=255)
@@ -67,11 +71,15 @@ class Engine(models.Model):
     dateEnreg = models.DateField(auto_now_add=True)
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
+    objects = models.Manager()
+
 class Appro(models.Model):
     engine = models.ForeignKey(Engine, related_name='appros', on_delete=models.CASCADE)
     qte = models.IntegerField()
     dateEnreg = models.DateField(auto_now_add=True)
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+
+    objects = models.Manager()
 
 class Commande(models.Model):
     user = models.ForeignKey(User, related_name='commandes', on_delete=models.CASCADE)
@@ -81,11 +89,15 @@ class Commande(models.Model):
     dateEnreg = models.DateField(auto_now_add=True)
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
+    objects = models.Manager()
+
 class Payement(models.Model):
     commande = models.ForeignKey(Commande, related_name='payments', on_delete=models.CASCADE)
     montant = models.FloatField()
     dateEnreg = models.DateField(auto_now_add=True)
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+
+    objects = models.Manager()
 
 class EnginLoue(models.Model):
     commande = models.ForeignKey(Commande, related_name='engins_loues', on_delete=models.CASCADE)
@@ -93,3 +105,5 @@ class EnginLoue(models.Model):
     statutRetourne = models.BooleanField(default=False)
     dateEnreg = models.DateField(auto_now_add=True)
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+
+    objects = models.Manager()

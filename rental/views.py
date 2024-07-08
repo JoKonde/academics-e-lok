@@ -1,27 +1,26 @@
 from rest_framework import viewsets
-from .models import *
-from .serializers import *
-
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
+from .models import User, Contact, Role, Engine, Appro, Commande, Payement, EnginLoue
+from .serializers import (
+    UserSerializer, ContactSerializer, RoleSerializer, EngineSerializer,
+    ApproSerializer, CommandeSerializer, PayementSerializer, EnginLoueSerializer
 )
+from  .auth import CustomTokenObtainPairView
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class RoleViewSet(viewsets.ModelViewSet):
-    queryset = Role.objects.all()
-    serializer_class = RoleSerializer
-
 class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
 
-class EnginViewSet(viewsets.ModelViewSet):
+class RoleViewSet(viewsets.ModelViewSet):
+    queryset = Role.objects.all()
+    serializer_class = RoleSerializer
+
+class EngineViewSet(viewsets.ModelViewSet):
     queryset = Engine.objects.all()
-    serializer_class = EnginSerializer
+    serializer_class = EngineSerializer
 
 class ApproViewSet(viewsets.ModelViewSet):
     queryset = Appro.objects.all()
@@ -38,12 +37,3 @@ class PayementViewSet(viewsets.ModelViewSet):
 class EnginLoueViewSet(viewsets.ModelViewSet):
     queryset = EnginLoue.objects.all()
     serializer_class = EnginLoueSerializer
-
-
-
-
-# Ajouter ces URLs dans rental/urls.py
-urlpatterns += [
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-]

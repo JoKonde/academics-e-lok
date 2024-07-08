@@ -1,14 +1,9 @@
 from rest_framework import serializers
-from .models import *
+from .models import User, Contact, Role, Engine, Appro, Commande, Payement, EnginLoue
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
-
-class RoleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Role
         fields = '__all__'
 
 class ContactSerializer(serializers.ModelSerializer):
@@ -16,7 +11,12 @@ class ContactSerializer(serializers.ModelSerializer):
         model = Contact
         fields = '__all__'
 
-class EnginSerializer(serializers.ModelSerializer):
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = '__all__'
+
+class EngineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Engine
         fields = '__all__'
