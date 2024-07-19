@@ -1,6 +1,8 @@
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
 from django.contrib.auth import get_user_model
+from django.db import connection
+from django.conf import settings
 from .models import Role, Contact
 import random
 import string
@@ -8,12 +10,16 @@ import string
 @receiver(post_migrate)
 def create_admin_user_and_roles(sender, **kwargs):
     User = get_user_model()
-    
+
+    # Vérifiez et créez la base de données si elle n'existe pas
+    with connection.cursor() as cursor:
+        cursor.execute(f"CREATE DATABASE IF NOT EXISTS {settings.DATABASES['default']['NAME']}")
+
     # Créez les rôles s'ils n'existent pas
     roles = ['Admin', 'Preteur', 'Loueur']
     for role_name in roles:
         Role.objects.get_or_create(roleName=role_name)
-    
+
     # Créez l'utilisateur admin s'il n'existe pas
     if not User.objects.filter(email='falone@gmail.com').exists():
         admin_user = User.objects.create_superuser(
@@ -23,9 +29,9 @@ def create_admin_user_and_roles(sender, **kwargs):
         )
 
         # Générer des informations de contact aléatoires
-        nom = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
-        postnom = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
-        prenom = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+        nom = "NYOTA"
+        postnom = "NYOTA"
+        prenom = "FALONE"
         tel = ''.join(random.choices(string.digits, k=10))
 
         Contact.objects.create(

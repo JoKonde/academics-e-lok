@@ -19,6 +19,6 @@ router.register(r'engins_loues', EnginLoueViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('auth', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('auth/refresh', TokenRefreshView.as_view(), name='token_refresh'),
 ]
