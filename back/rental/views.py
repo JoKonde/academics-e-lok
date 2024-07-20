@@ -2,9 +2,10 @@ from rest_framework import viewsets
 from .models import User, Contact, Role, Engine, Appro, Commande, Payement, EnginLoue
 from .serializers import (
     UserSerializer, ContactSerializer, RoleSerializer, EngineSerializer,
-    ApproSerializer, CommandeSerializer, PayementSerializer, EnginLoueSerializer
+    ApproSerializer, CommandeSerializer, PayementSerializer, EnginLoueSerializer,UserCreateSerializer
 )
 from  .auth import CustomTokenObtainPairView
+from rest_framework import generics
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -37,3 +38,8 @@ class PayementViewSet(viewsets.ModelViewSet):
 class EnginLoueViewSet(viewsets.ModelViewSet):
     queryset = EnginLoue.objects.all()
     serializer_class = EnginLoueSerializer
+
+
+class UserCreateView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserCreateSerializer

@@ -2,6 +2,13 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 import uuid
 
+class Role(models.Model):
+    roleName = models.CharField(max_length=255)
+    dateEnreg = models.DateField(auto_now_add=True)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+
+    objects = models.Manager()
+
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None, **extra_fields):
         if not email:
@@ -18,12 +25,16 @@ class UserManager(BaseUserManager):
         return self.create_user(email, username, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
+    
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=255, unique=True)
     dateEnreg = models.DateField(auto_now_add=True)
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+
+    # Nouvelle relation avec le modèle Role
+    role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True, blank=True, related_name='users')
 
     objects = UserManager()
 
@@ -55,12 +66,7 @@ class Contact(models.Model):
 
     objects = models.Manager()
 
-class Role(models.Model):
-    roleName = models.CharField(max_length=255)
-    dateEnreg = models.DateField(auto_now_add=True)
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
-    objects = models.Manager()
 
 class Engine(models.Model):
     marque = models.CharField(max_length=255)
