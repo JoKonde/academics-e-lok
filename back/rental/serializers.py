@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
-        fields = '__all__'
+        fields = ['nom', 'postnom', 'prenom', 'tel']
 
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,70 +44,70 @@ class EnginLoueSerializer(serializers.ModelSerializer):
         model = EnginLoue
         fields = '__all__'
 
-
-
-
 class UserCreateSerializer(serializers.ModelSerializer):
     role = serializers.ChoiceField(choices=[('preteur', 'Preteur'), ('loueur', 'Loueur')])
-    nom = serializers.CharField(max_length=255)
-    postnom = serializers.CharField(max_length=255)
-    prenom = serializers.CharField(max_length=255)
-    tel = serializers.CharField(max_length=20)
-    
+    contact = ContactSerializer()
+
     class Meta:
         model = User
-        fields = ['email', 'password', 'role', 'nom', 'postnom', 'prenom', 'tel']
+        fields = ['email', 'password', 'role', 'contact']
         extra_kwargs = {
             'password': {'write_only': True},
         }
-    
+
+    def get_role_by_name(self, role_name):
+        try:
+            # Utilisez 'roleName' au lieu de 'name'
+            role = Role.objects.get(roleName=role_name)
+            return role
+        except Role.DoesNotExist:
+            return None
+
     def validate(self, data):
-        # Validation des champs vides
+        # Validation des champs vides pour le contact
+        contact_data = data.get('contact', {})
         required_fields = ['nom', 'postnom', 'prenom', 'tel']
         for field in required_fields:
-            if not data.get(field):
-                raise serializers.ValidationError({field: f"Veuillez remplir tous les champs."})
+            if not contact_data.get(field):
+                raise serializers.ValidationError({field: f"Veuillez remplir tous les champs du contact."})
         
         # Validation email unique
         if User.objects.filter(email=data['email']).exists():
             raise serializers.ValidationError({'email': 'Cette adresse email est déjà prise.'})
 
         # Validation téléphone unique
-        if Contact.objects.filter(tel=data['tel']).exists():
+        if Contact.objects.filter(tel=contact_data.get('tel')).exists():
             raise serializers.ValidationError({'tel': 'Ce numéro de téléphone est déjà pris.'})
         
         return data
 
     def create(self, validated_data):
-        # Extraire les informations spécifiques
-        nom = validated_data.pop('nom')
-        postnom = validated_data.pop('postnom')
-        prenom = validated_data.pop('prenom')
-        tel = validated_data.pop('tel')
+        # Extraire les données du contact
+        contact_data = validated_data.pop('contact')
         role_name = validated_data.pop('role')
-        
+        role = self.get_role_by_name(role_name)
+
+        if not role:
+            raise serializers.ValidationError({"role": "Le rôle spécifié n'existe pas."})
+
         # Générer un username unique
         num = ''.join(secrets.choice('0123456789') for _ in range(10))
-        username = f"{prenom}{num}"
+        username = f"{contact_data.get('prenom')}{num}"
         validated_data['username'] = username
-
+        validated_data['role'] = role
+        
         try:
             with transaction.atomic():
                 # Créer l'utilisateur
                 user = User.objects.create_user(**validated_data)
                 
                 # Créer le contact associé
-                #role = Role.objects.get(role_name=role_name)
                 Contact.objects.create(
                     user=user,
-                    nom=nom,
-                    postnom=postnom,
-                    prenom=prenom,
-                    tel=tel
+                    **contact_data
                 )
                 
                 return user
-        except Role.DoesNotExist:
-            raise serializers.ValidationError({"role": "Le rôle spécifié n'existe pas."})
         except Exception as e:
             raise serializers.ValidationError({"detail": str(e)})
+

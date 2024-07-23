@@ -25,7 +25,8 @@ def create_admin_user_and_roles(sender, **kwargs):
         admin_user = User.objects.create_superuser(
             email='falone@gmail.com',
             username='falone',
-            password='123456789'  # Vous pouvez changer le mot de passe
+            password='123456789',  # Vous pouvez changer le mot de passe
+            role_id=1
         )
 
         # Générer des informations de contact aléatoires
