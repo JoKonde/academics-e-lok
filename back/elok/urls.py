@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rental.views import (
     UserViewSet, ContactViewSet, RoleViewSet, EngineViewSet,
-    ApproViewSet, CommandeViewSet, PayementViewSet, EnginLoueViewSet,UserCreateView
+    ApproViewSet, CommandeViewSet, PayementViewSet, EnginLoueViewSet,CreateUserView
 )
 from rental.auth import CustomTokenObtainPairView
 # Importer la vue de page 404
@@ -30,7 +30,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('auth', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/refresh', TokenRefreshView.as_view(), name='token_refresh'),
-     path('new-account', UserCreateView.as_view(), name='user_register'),
+     path('new-account', CreateUserView.as_view(), name='user_register'),
 ]
 
 if settings.DEBUG:

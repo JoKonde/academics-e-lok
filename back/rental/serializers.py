@@ -17,7 +17,7 @@ class ContactSerializer(serializers.ModelSerializer):
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
-        fields = '__all__'
+        fields = ['roleName']
 
 class EngineSerializer(serializers.ModelSerializer):
     class Meta:

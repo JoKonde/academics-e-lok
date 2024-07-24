@@ -7,6 +7,11 @@ from .serializers import (
 from  .auth import CustomTokenObtainPairView
 from rest_framework import generics
 
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import UserCreateSerializer
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -40,6 +45,10 @@ class EnginLoueViewSet(viewsets.ModelViewSet):
     serializer_class = EnginLoueSerializer
 
 
-class UserCreateView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserCreateSerializer
+class CreateUserView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = UserCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
