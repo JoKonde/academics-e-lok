@@ -1,4 +1,6 @@
 import React from 'react';
+import DemoSwitcher from './DemoSwitcher';
+import SignInModal from './SignInModal';
 
 /*import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -10,7 +12,8 @@ const Home = () => {
 
     return (
         <div>
-            <h5>Home</h5>
+            <DemoSwitcher/>
+            <SignInModal />
         </div>
     );
 }
