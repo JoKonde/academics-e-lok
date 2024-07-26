@@ -15,10 +15,10 @@ const Hero=()=>{
     <div className="row pt-lg-4 pt-xl-5">
       <div className="col-lg-4 col-md-5 pt-3 pt-md-4 pt-lg-5">
         <h1 className="display-4 text-light pb-2 mb-4 me-md-n5">
-          Easy way to find the right car
+          Louer Véhicules et Vélos
         </h1>
         <p className="fs-lg text-light opacity-70">
-          Finder is a leading digital marketplace for the automotive industry that connects car shoppers with sellers.
+        E-Lok! Votre agence de location vehicules et vélo de confiance
         </p>
       </div>
       <div className="col-lg-8 col-md-7 pt-md-5">

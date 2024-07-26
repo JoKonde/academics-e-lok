@@ -2,11 +2,11 @@ import React from 'react';
 import SignUpModal from './SignUpModal';
 import Navbar from './Navbar';
 import Hero from './Hero';
+import BodyType from './BodyType';
 
 const SignInModal = () => {
   return (
-    <main className="page-wrapper">
-      {/* Sign In Modal */}
+    
       <div className="modal fade" id="signin-modal" tabIndex="-1" aria-hidden="true">
         <div className="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto" style={{ maxWidth: '950px' }}>
           <div className="modal-content bg-dark border-light">
@@ -18,40 +18,40 @@ const SignInModal = () => {
               ></button>
               <div className="row mx-0 align-items-center">
                 <div className="col-md-6 border-end-md border-light p-4 p-sm-5">
-                  <h2 className="h3 text-light mb-4 mb-sm-5">Hey there!<br />Welcome back.</h2>
+                  <h2 className="h3 text-light mb-4 mb-sm-5">Salutation!<br />Bienvenue.</h2>
                   <img
                     className="d-block mx-auto"
-                    src="img/signin-modal/signin-dark.svg"
+                    src="assets/img/signin-modal/signin-dark.svg"
                     width="344"
                     alt="Illustration"
                   />
                   <div className="text-light mt-4 mt-sm-5">
-                    <span className="opacity-60">Don't have an account? </span>
+                    <span className="opacity-60">Vous n'avez pas de compte? </span>
                     <a
                       className="text-light"
                       href="#signup-modal"
                       data-bs-toggle="modal"
                       data-bs-dismiss="modal"
                     >
-                      Sign up here
+                      Créer en un
                     </a>
                   </div>
                 </div>
                 <div className="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
                   <a className="btn btn-outline-info w-100 mb-3" href="#">
-                    <i className="fi-google fs-lg me-1"></i>Sign in with Google
+                    <i className="fi-google fs-lg me-1"></i>Se Connecter avec Google
                   </a>
                   <a className="btn btn-outline-info w-100 mb-3" href="#">
-                    <i className="fi-facebook fs-lg me-1"></i>Sign in with Facebook
+                    <i className="fi-facebook fs-lg me-1"></i>Se Connecter avec Facebook
                   </a>
                   <div className="d-flex align-items-center py-3 mb-3">
                     <hr className="hr-light w-100" />
-                    <div className="text-light opacity-70 px-3">Or</div>
+                    <div className="text-light opacity-70 px-3">Ou</div>
                     <hr className="hr-light w-100" />
                   </div>
                   <form className="needs-validation" noValidate>
                     <div className="mb-4">
-                      <label className="form-label text-light mb-2" htmlFor="signin-email">Email address</label>
+                      <label className="form-label text-light mb-2" htmlFor="signin-email">Email</label>
                       <input
                         className="form-control form-control-light"
                         type="email"
@@ -62,8 +62,8 @@ const SignInModal = () => {
                     </div>
                     <div className="mb-4">
                       <div className="d-flex align-items-center justify-content-between mb-2">
-                        <label className="form-label text-light mb-0" htmlFor="signin-password">Password</label>
-                        <a className="fs-sm text-light" href="#">Forgot password?</a>
+                        <label className="form-label text-light mb-0" htmlFor="signin-password">Mot de Passe</label>
+                        <a className="fs-sm text-light" href="#">Mot de Passe oublié?</a>
                       </div>
                       <div className="password-toggle">
                         <input
@@ -79,7 +79,7 @@ const SignInModal = () => {
                         </label>
                       </div>
                     </div>
-                    <button className="btn btn-primary btn-lg w-100" type="submit">Sign in</button>
+                    <button className="btn btn-primary btn-lg w-100" type="submit">Se Connecter</button>
                   </form>
                 </div>
               </div>
@@ -87,11 +87,7 @@ const SignInModal = () => {
           </div>
         </div>
       </div>
-      {/* Sign Up Modal */}
-      <SignUpModal />
-      <Navbar />
-      <Hero />
-    </main>
+      
   );
 };
 

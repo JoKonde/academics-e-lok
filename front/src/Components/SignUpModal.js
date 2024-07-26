@@ -32,7 +32,7 @@ const SignUpModal = () => {
                 </ul>
                 <img
                   className="d-block mx-auto"
-                  src="img/signin-modal/signup-dark.svg"
+                  src="assets/img/signin-modal/signup-dark.svg"
                   width="344"
                   alt="Illustration"
                 />

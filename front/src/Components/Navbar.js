@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <header className="navbar navbar-expand-lg navbar-dark fixed-top" data-scroll-header>
       <div className="container">
-        <a className="navbar-brand me-3 me-xl-4" href="car-finder-home.html">
-          <img className="d-block" src="assets/img/logo/logo-light.svg" width="116" alt="Finder" />
-        </a>
+        <Link className="navbar-brand me-3 me-xl-4" to="/">
+          <img className="d-block" src="assets/img/lg.png" width="116" alt="E-Lok" />
+        </Link>
         <button
           className="navbar-toggler ms-auto"
           type="button"
@@ -19,10 +20,10 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <a className="btn btn-link btn-light btn-sm d-none d-lg-block order-lg-3" href="#signin-modal" data-bs-toggle="modal">
-          <i className="fi-user me-2"></i>Sign in
+          <i className="fi-user me-2"></i>Se Connecter
         </a>
         <a className="btn btn-primary btn-sm ms-2 order-lg-3" href="car-finder-sell-car.html">
-          <i className="fi-plus me-2"></i>Sell car
+          <i className="fi-plus me-2"></i>Créer Compte
         </a>
         <div className="collapse navbar-collapse order-lg-2" id="navbarNav">
           <ul className="navbar-nav navbar-nav-scroll" style={{ maxHeight: '35rem' }}>
