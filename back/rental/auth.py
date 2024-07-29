@@ -13,7 +13,8 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         user = authenticate(username=request.data.get('email'), password=request.data.get('password'))
         
         if user:
+            serializer.is_valid(raise_exception=True)
             # Gérer ici la création de tokens, par exemple
             return Response(serializer.validated_data, status=status.HTTP_200_OK)
         else:
-            return Response({"error": "Identifiants invalides"}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({"msg": "Compte non trouvé"}, status=status.HTTP_406_NOT_ACCEPTABLE)

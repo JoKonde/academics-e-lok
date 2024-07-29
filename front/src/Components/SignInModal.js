@@ -1,13 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SignUpModal from './SignUpModal';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import BodyType from './BodyType';
-
+import Api from '../Cnx';
+import axios from 'axios';
+import { baseURL } from "../env";
+import Popup from './Popups/Message';
 const SignInModal = () => {
+
+  const [verif, setVerif] = useState(false);
+  const [errors, setErrors] = useState([]);
+  const [msg, setMsg] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const login = () => {
+    setErrors([]);
+
+    axios.post(baseURL+"/auth",{
+      "email":email,
+      "password":password
+    })
+
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        //setMsg(error.response.data.message);
+        setErrors(error.response.data);
+        //setVerif(true);
+        console.log(error);
+      });
+  };
+
+
+
+
   return (
     
       <div className="modal fade" id="signin-modal" tabIndex="-1" aria-hidden="true">
+        {verif && <Popup  message={msg} setVerif={setVerif} />}
         <div className="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto" style={{ maxWidth: '950px' }}>
           <div className="modal-content bg-dark border-light">
             <div className="modal-body px-0 py-2 py-sm-0">
@@ -49,16 +81,20 @@ const SignInModal = () => {
                     <div className="text-light opacity-70 px-3">Ou</div>
                     <hr className="hr-light w-100" />
                   </div>
-                  <form className="needs-validation" noValidate>
+                  <span className='text-danger px-5'>{errors && errors.detail}</span>
+                  <div className="needs-validation">
+                  
                     <div className="mb-4">
                       <label className="form-label text-light mb-2" htmlFor="signin-email">Email</label>
                       <input
                         className="form-control form-control-light"
                         type="email"
                         id="signin-email"
-                        placeholder="Enter your email"
+                        placeholder="Votre adresse email"
                         required
+                        onChange={(e) =>setEmail(e.target.value)}
                       />
+                      <span className='text-danger'>{errors && errors.email}</span>
                     </div>
                     <div className="mb-4">
                       <div className="d-flex align-items-center justify-content-between mb-2">
@@ -70,17 +106,21 @@ const SignInModal = () => {
                           className="form-control form-control-light"
                           type="password"
                           id="signin-password"
-                          placeholder="Enter password"
+                          placeholder="Votre mot de passe"
                           required
+                          onChange={(e) =>setPassword(e.target.value)}
                         />
+                        
                         <label className="password-toggle-btn" aria-label="Show/hide password">
                           <input className="password-toggle-check" type="checkbox" />
                           <span className="password-toggle-indicator"></span>
                         </label>
+                        
                       </div>
+                      <span className='text-danger'>{errors && errors.password}</span>
                     </div>
-                    <button className="btn btn-primary btn-lg w-100" type="submit">Se Connecter</button>
-                  </form>
+                    <button className="btn btn-primary btn-lg w-100" onClick={login}>Se Connecter</button>
+                  </div>
                 </div>
               </div>
             </div>
