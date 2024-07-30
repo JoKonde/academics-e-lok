@@ -7,7 +7,7 @@ const Footer = () => {
   <div className="border-bottom border-light py-4">
     <div className="container d-sm-flex align-items-center justify-content-between">
       <a className="d-inline-block" href="real-estate-home-v1.html">
-        <img src="assets/img/logo/logo-light.svg" width="116" alt="logo" />
+        <img src="assets/img/lg2.png" width="90" alt="logo" />
       </a>
       <div className="d-flex pt-3 pt-sm-0">
         <div className="dropdown ms-n3">
@@ -62,9 +62,9 @@ const Footer = () => {
   <div className="container pt-4 pb-3 pt-lg-5 pb-lg-4">
     <div className="row pt-2 pt-lg-0">
       <div className="col-lg-3 pb-2 mb-4">
-        <h3 className="h5 text-light mb-2">Subscribe to our newsletter</h3>
+        <h3 className="h5 text-light mb-2">Inscrivez-vous à notre Newsletters</h3>
         <p className="fs-sm text-light opacity-70">
-          Don’t miss any relevant offers!
+          Ne Manquez pas vos nouveautés!
         </p>
         <form className="form-group form-group-light w-100">
           <div className="input-group input-group-sm">
@@ -214,14 +214,14 @@ const Footer = () => {
       </a>
     </div>
     <p className="text-center text-lg-start order-lg-1 mb-lg-0">
-      <span className="text-light opacity-50">&copy; All rights reserved. Made by </span>
+      <span className="text-light opacity-50">&copy;2024 Tous les droits reservés à </span>
       <a
         className="nav-link-light fw-bold"
-        href="https://createx.studio/"
+        href="mailto:jonathankonde430@gmail.com"
         target="_blank"
         rel="noopener"
       >
-        Createx Studio
+        LIKASA
       </a>
     </p>
   </div>

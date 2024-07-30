@@ -1,6 +1,40 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { baseURL } from '../env';
+
+
+  
 
 const SignUpModal = () => {
+  const [verif, setVerif] = useState(false);
+  const [errors, setErrors] = useState([]);
+  const [msg, setMsg] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [verifBtn, setVerifBtn] = useState(false);
+
+
+  const createAccount = () => {
+    setErrors([]);
+    setVerifBtn(true);
+    axios.post(baseURL+"/new-account",{
+      "email":email,
+      "password":password
+    })
+
+      .then((res) => {
+        console.log(res);
+        setVerifBtn(false);
+      })
+      .catch((error) => {
+        //setMsg(error.response.data.message);
+        //setErrors(error.response.data);
+        //setVerif(true);
+        console.log(error);
+        setVerifBtn(false);
+      });
+  };
+
   return (
     <div className="modal fade" id="signup-modal" tabIndex="-1" aria-hidden="true">
       <div className="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto" style={{ maxWidth: '950px' }}>
@@ -14,20 +48,20 @@ const SignUpModal = () => {
             <div className="row mx-0 align-items-center">
               <div className="col-md-6 border-end-md border-light p-4 p-sm-5">
                 <h2 className="h3 text-light mb-4 mb-sm-5">
-                  Join Finder.<br />Get premium benefits:
+                  Rejoingnez-Nous <br />sur E-Lok.
                 </h2>
                 <ul className="list-unstyled mb-4 mb-sm-5">
                   <li className="d-flex mb-2">
                     <i className="fi-check-circle text-primary mt-1 me-2"></i>
-                    <span className="text-light">Add and promote your listings</span>
+                    <span className="text-light">Vous êtes Preteur</span>
                   </li>
                   <li className="d-flex mb-2">
                     <i className="fi-check-circle text-primary mt-1 me-2"></i>
-                    <span className="text-light">Easily manage your wishlist</span>
+                    <span className="text-light">Vous êtes Loueur</span>
                   </li>
                   <li className="d-flex mb-0">
                     <i className="fi-check-circle text-primary mt-1 me-2"></i>
-                    <span className="text-light">Leave reviews</span>
+                    <span className="text-light">Cette Plateforme est pour Vous!</span>
                   </li>
                 </ul>
                 <img
@@ -37,53 +71,83 @@ const SignUpModal = () => {
                   alt="Illustration"
                 />
                 <div className="text-light mt-sm-4 pt-md-3">
-                  <span className="opacity-60">Already have an account? </span>
+                  <span className="opacity-60">Vous avez déjà un compte? </span>
                   <a
                     className="text-light"
                     href="#signin-modal"
                     data-bs-toggle="modal"
                     data-bs-dismiss="modal"
                   >
-                    Sign in
+                    Connectez-Vous
                   </a>
                 </div>
               </div>
               <div className="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
                 <a className="btn btn-outline-info w-100 mb-3" href="#">
-                  <i className="fi-google fs-lg me-1"></i>Sign in with Google
+                  <i className="fi-google fs-lg me-1"></i>Créer avec Google
                 </a>
                 <a className="btn btn-outline-info w-100 mb-3" href="#">
-                  <i className="fi-facebook fs-lg me-1"></i>Sign in with Facebook
+                  <i className="fi-facebook fs-lg me-1"></i>Créer avec Facebook
                 </a>
                 <div className="d-flex align-items-center py-3 mb-3">
                   <hr className="hr-light w-100" />
-                  <div className="text-light opacity-70 px-3">Or</div>
+                  <div className="text-light opacity-70 px-3">Ou</div>
                   <hr className="hr-light w-100" />
                 </div>
                 <form className="needs-validation" noValidate>
                   <div className="mb-4">
-                    <label className="form-label text-light" htmlFor="signup-name">Full name</label>
+                    <label className="form-label text-light" htmlFor="signup-name">Nom</label>
                     <input
                       className="form-control form-control-light"
                       type="text"
                       id="signup-name"
-                      placeholder="Enter your full name"
+                      placeholder="Nom..."
                       required
                     />
                   </div>
                   <div className="mb-4">
-                    <label className="form-label text-light" htmlFor="signup-email">Email address</label>
+                    <label className="form-label text-light" htmlFor="signup-name">Postnom</label>
+                    <input
+                      className="form-control form-control-light"
+                      type="text"
+                      id="signup-name"
+                      placeholder="Postnom..."
+                      required
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label className="form-label text-light" htmlFor="signup-name">Prénom</label>
+                    <input
+                      className="form-control form-control-light"
+                      type="text"
+                      id="signup-name"
+                      placeholder="Prénom..."
+                      required
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label className="form-label text-light" htmlFor="signup-name">Tél</label>
+                    <input
+                      className="form-control form-control-light"
+                      type="text"
+                      id="signup-name"
+                      placeholder="Tél..."
+                      required
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label className="form-label text-light" htmlFor="signup-email">Email</label>
                     <input
                       className="form-control form-control-light"
                       type="email"
                       id="signup-email"
-                      placeholder="Enter your email"
+                      placeholder="Email..."
                       required
                     />
                   </div>
                   <div className="mb-4">
                     <label className="form-label text-light" htmlFor="signup-password">
-                      Password <span className="fs-sm opacity-50">min. 8 char</span>
+                      Mot de Passe <span className="fs-sm opacity-50">min. 8 char</span>
                     </label>
                     <div className="password-toggle">
                       <input
@@ -100,7 +164,7 @@ const SignUpModal = () => {
                     </div>
                   </div>
                   <div className="mb-4">
-                    <label className="form-label text-light" htmlFor="signup-password-confirm">Confirm password</label>
+                    <label className="form-label text-light" htmlFor="signup-password-confirm">Confirmez Mot de Passe</label>
                     <div className="password-toggle">
                       <input
                         className="form-control form-control-light"
@@ -118,13 +182,22 @@ const SignUpModal = () => {
                   <div className="form-check form-check-light mb-4">
                     <input className="form-check-input" type="checkbox" id="agree-to-terms" required />
                     <label className="form-check-label" htmlFor="agree-to-terms">
-                      <span className="opacity-70">By joining, I agree to the</span> 
-                      <a href="#" className="text-light">Terms of use</a> 
-                      <span className="opacity-70">and</span> 
-                      <a href="#" className="text-light">Privacy policy</a>
+                      <span className="opacity-70">Vous acceptez</span> 
+                      <a href="#" className="text-light"> Conditions Générales d'Utilisation</a> 
+                      <span className="opacity-70">Et</span> 
+                      <a href="#" className="text-light">Politiques de Confidentialités</a>
                     </label>
                   </div>
-                  <button className="btn btn-primary btn-lg w-100" type="submit">Sign up</button>
+                  {
+                verifBtn?(
+                  <button className="btn btn-primary btn-lg w-100" disabled type="button">
+                        <span aria-hidden="true" className="spinner-border spinner-border-sm" role="status"></span>  Chargement...
+                        </button>
+                ):(
+                  <button className="btn btn-primary btn-lg w-100" onClick={createAccount}>Créer</button>
+                )
+              }
+                  
                 </form>
               </div>
             </div>

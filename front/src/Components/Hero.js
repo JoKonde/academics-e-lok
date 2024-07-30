@@ -36,12 +36,12 @@ const Hero=()=>{
     <ul className="nav nav-tabs nav-tabs-light mb-4">
       <li className="nav-item">
         <a className="nav-link active" href="#">
-          New
+          Nouveautés
         </a>
       </li>
       <li className="nav-item">
         <a className="nav-link" href="#">
-          Used
+          Occasion
         </a>
       </li>
     </ul>

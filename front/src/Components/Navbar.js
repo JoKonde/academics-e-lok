@@ -22,7 +22,10 @@ const Navbar = () => {
         <a className="btn btn-link btn-light btn-sm d-none d-lg-block order-lg-3" href="#signin-modal" data-bs-toggle="modal">
           <i className="fi-user me-2"></i>Se Connecter
         </a>
-        <a className="btn btn-primary btn-sm ms-2 order-lg-3" href="car-finder-sell-car.html">
+        <a className="btn btn-primary btn-sm ms-2 order-lg-3"
+        data-bs-toggle="modal"
+        data-bs-dismiss="modal"
+        href="#signup-modal">
           <i className="fi-plus me-2"></i>Créer Compte
         </a>
         <div className="collapse navbar-collapse order-lg-2" id="navbarNav">
@@ -35,51 +38,9 @@ const Navbar = () => {
               
             </li>
             <li className="nav-item active"><Link className="nav-link" to="/">Info</Link></li>
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catalog</a>
-              <ul className="dropdown-menu dropdown-menu-dark">
-                <li><a className="dropdown-item" href="car-finder-catalog-list.html">List View</a></li>
-                <li><a className="dropdown-item" href="car-finder-catalog-grid.html">Grid View</a></li>
-                <li><a className="dropdown-item" href="car-finder-single.html">Car Single Page</a></li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-              <ul className="dropdown-menu dropdown-menu-dark">
-                <li><a className="dropdown-item" href="car-finder-account-info.html">Personal Info</a></li>
-                <li><a className="dropdown-item" href="car-finder-account-security.html">Password &amp; Security</a></li>
-                <li><a className="dropdown-item" href="car-finder-account-cars.html">My Cars</a></li>
-                <li><a className="dropdown-item" href="car-finder-account-wishlist.html">Wishlist</a></li>
-                <li><a className="dropdown-item" href="car-finder-account-reviews.html">Reviews</a></li>
-                <li><a className="dropdown-item" href="car-finder-account-notifications.html">Notifications</a></li>
-                <li><a className="dropdown-item" href="signin-dark.html">Sign In</a></li>
-                <li><a className="dropdown-item" href="signup-dark.html">Sign Up</a></li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Vendor</a>
-              <ul className="dropdown-menu dropdown-menu-dark">
-                <li><a className="dropdown-item" href="car-finder-sell-car.html">Sell Car</a></li>
-                <li><a className="dropdown-item" href="car-finder-promotion.html">Ad Promotion Page</a></li>
-                <li><a className="dropdown-item" href="car-finder-vendor.html">Vendor Page</a></li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-              <ul className="dropdown-menu dropdown-menu-dark">
-                <li><a className="dropdown-item" href="car-finder-about.html">About</a></li>
-                <li className="dropdown">
-                  <a className="dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
-                  <ul className="dropdown-menu dropdown-menu-dark">
-                    <li><a className="dropdown-item" href="car-finder-blog.html">Blog Grid</a></li>
-                    <li><a className="dropdown-item" href="car-finder-blog-single.html">Single Post</a></li>
-                  </ul>
-                </li>
-                <li><a className="dropdown-item" href="car-finder-contacts.html">Contacts</a></li>
-                <li><a className="dropdown-item" href="car-finder-help-center.html">Help Center</a></li>
-                <li><a className="dropdown-item" href="car-finder-404.html">404 Not Found</a></li>
-              </ul>
-            </li>
+            <li className="nav-item "><Link className="nav-link" to="/">Contact</Link></li>
+            <li className="nav-item "><Link className="nav-link" to="/">A Propos</Link></li>
+            
             <li className="nav-item d-lg-none">
               <a className="nav-link" href="#signin-modal" data-bs-toggle="modal"><i className="fi-user me-2"></i>Sign in</a>
             </li>
