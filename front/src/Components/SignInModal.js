@@ -14,9 +14,10 @@ const SignInModal = () => {
   const [msg, setMsg] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [verifBtn, setVerifBtn] = useState(false);
   const login = () => {
     setErrors([]);
-
+    setVerifBtn(true);
     axios.post(baseURL+"/auth",{
       "email":email,
       "password":password
@@ -24,12 +25,14 @@ const SignInModal = () => {
 
       .then((res) => {
         console.log(res);
+        setVerifBtn(false);
       })
       .catch((error) => {
         //setMsg(error.response.data.message);
         setErrors(error.response.data);
         //setVerif(true);
         console.log(error);
+        setVerifBtn(false);
       });
   };
 
@@ -119,7 +122,16 @@ const SignInModal = () => {
                       </div>
                       <span className='text-danger'>{errors && errors.password}</span>
                     </div>
-                    <button className="btn btn-primary btn-lg w-100" onClick={login}>Se Connecter</button>
+                    {
+                verifBtn?(
+                  <button className="btn btn-primary btn-lg w-100" disabled type="button">
+                        <span aria-hidden="true" className="spinner-border spinner-border-sm" role="status"></span>  Chargement...
+                        </button>
+                ):(
+                  <button className="btn btn-primary btn-lg w-100" onClick={login}>Se Connecter</button>
+                )
+              }
+                    
                   </div>
                 </div>
               </div>
