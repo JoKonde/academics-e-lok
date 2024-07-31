@@ -11,6 +11,12 @@ const SignUpModal = () => {
   const [msg, setMsg] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [tel, setTel] = useState("");
+  const [role, setRole] = useState("");
+  const [middlename, setMiddlename] = useState("");
   const [verifBtn, setVerifBtn] = useState(false);
 
 
@@ -19,7 +25,14 @@ const SignUpModal = () => {
     setVerifBtn(true);
     axios.post(baseURL+"/new-account",{
       "email":email,
-      "password":password
+      "password":password,
+      "role":role,
+      "contact":{
+        "nom":lastname,
+        "postnom":middlename,
+        "prenom":firstname,
+        "tel":tel
+      }
     })
 
       .then((res) => {
@@ -35,6 +48,7 @@ const SignUpModal = () => {
       });
   };
 
+  
   return (
     <div className="modal fade" id="signup-modal" tabIndex="-1" aria-hidden="true">
       <div className="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto" style={{ maxWidth: '950px' }}>
@@ -103,7 +117,9 @@ const SignUpModal = () => {
                       id="signup-name"
                       placeholder="Nom..."
                       required
+                      onChange={(e)=>setLastname(e.target.value)}
                     />
+                    <span className='text-danger'>{errors && errors.contact && errors.contact.nom && errors.contact.nom}</span>
                   </div>
                   <div className="mb-4">
                     <label className="form-label text-light" htmlFor="signup-name">Postnom</label>
@@ -113,7 +129,9 @@ const SignUpModal = () => {
                       id="signup-name"
                       placeholder="Postnom..."
                       required
+                      onChange={(e)=>setMiddlename(e.target.value)}
                     />
+                    <span className='text-danger'>{errors && errors.contact && errors.contact.postnom && errors.contact.postnom}</span>
                   </div>
                   <div className="mb-4">
                     <label className="form-label text-light" htmlFor="signup-name">Prénom</label>
@@ -123,7 +141,9 @@ const SignUpModal = () => {
                       id="signup-name"
                       placeholder="Prénom..."
                       required
+                      onChange={(e)=>setFirstname(e.target.value)}
                     />
+                    <span className='text-danger'>{errors && errors.contact && errors.contact.prenom && errors.contact.prenom}</span>
                   </div>
                   <div className="mb-4">
                     <label className="form-label text-light" htmlFor="signup-name">Tél</label>
@@ -133,7 +153,9 @@ const SignUpModal = () => {
                       id="signup-name"
                       placeholder="Tél..."
                       required
+                      onChange={(e)=>setTel(e.target.value)}
                     />
+                    <span className='text-danger'>{errors && errors.contact && errors.contact.tel && errors.contact.tel}</span>
                   </div>
                   <div className="mb-4">
                     <label className="form-label text-light" htmlFor="signup-email">Email</label>
@@ -143,7 +165,9 @@ const SignUpModal = () => {
                       id="signup-email"
                       placeholder="Email..."
                       required
+                      onChange={(e)=>setEmail(e.target.value)}
                     />
+                    <span className='text-danger'>{errors && errors.email}</span>
                   </div>
                   <div className="mb-4">
                     <label className="form-label text-light" htmlFor="signup-password">
@@ -156,12 +180,14 @@ const SignUpModal = () => {
                         id="signup-password"
                         minLength="8"
                         required
+                        onChange={(e)=>setPassword(e.target.value)}
                       />
                       <label className="password-toggle-btn" aria-label="Show/hide password">
                         <input className="password-toggle-check" type="checkbox" />
                         <span className="password-toggle-indicator"></span>
                       </label>
                     </div>
+                    <span className='text-danger'>{errors && errors.password}</span>
                   </div>
                   <div className="mb-4">
                     <label className="form-label text-light" htmlFor="signup-password-confirm">Confirmez Mot de Passe</label>
@@ -172,12 +198,26 @@ const SignUpModal = () => {
                         id="signup-password-confirm"
                         minLength="8"
                         required
+                        onChange={(e)=>setConfirmPassword(e.target.value)}
                       />
                       <label className="password-toggle-btn" aria-label="Show/hide password">
                         <input className="password-toggle-check" type="checkbox" />
                         <span className="password-toggle-indicator"></span>
                       </label>
                     </div>
+                  </div>
+                  <div className="mb-4">
+                    <label className="form-label text-light" htmlFor="signup-email">Role</label>
+                    <select
+                      className="form-control form-control"
+                        onChange={(e)=>setRole(e.target.value)}
+                      >
+                        <option value={""}>Choisir un rôle</option>
+                        <option value={"preteur"}>Preteur</option>
+                        <option value={"loueur"}>Loueur</option>
+
+                    </select>
+                    <span className='text-danger'>{errors && errors.role}</span>
                   </div>
                   <div className="form-check form-check-light mb-4">
                     <input className="form-check-input" type="checkbox" id="agree-to-terms" required />
