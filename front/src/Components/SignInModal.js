@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import SignUpModal from './SignUpModal';
-import Navbar from './Navbar';
-import Hero from './Hero';
-import BodyType from './BodyType';
-import Api from '../Cnx';
+
 import axios from 'axios';
 import { baseURL } from "../env";
 import Popup from './Popups/Message';
+import { useNavigate } from 'react-router-dom';
 const SignInModal = () => {
 
   const [verif, setVerif] = useState(false);
@@ -15,6 +12,7 @@ const SignInModal = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verifBtn, setVerifBtn] = useState(false);
+  const navigate=useNavigate();
   const login = () => {
     setErrors([]);
     setVerifBtn(true);
@@ -25,14 +23,20 @@ const SignInModal = () => {
 
       .then((res) => {
         console.log(res);
+        sessionStorage.setItem("access",res.data.access);
+        sessionStorage.setItem("refresh",res.data.refresh);
+        if(res.data.access){
+          navigate("/accueil")
+        }
         setVerifBtn(false);
       })
       .catch((error) => {
         //setMsg(error.response.data.message);
+        setVerifBtn(false);
         setErrors(error.response.data);
         //setVerif(true);
         console.log(error);
-        setVerifBtn(false);
+        
       });
   };
 

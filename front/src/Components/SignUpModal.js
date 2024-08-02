@@ -41,7 +41,7 @@ const SignUpModal = () => {
       })
       .catch((error) => {
         //setMsg(error.response.data.message);
-        //setErrors(error.response.data);
+        setErrors(error.response.data);
         //setVerif(true);
         console.log(error);
         setVerifBtn(false);
