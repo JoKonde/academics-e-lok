@@ -3,6 +3,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
+from django.shortcuts import render
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
@@ -18,3 +19,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             return Response(serializer.validated_data, status=status.HTTP_200_OK)
         else:
             return Response({"msg": "Compte non trouvé"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+
+def login_view(request):
+    return render(request, 'login.html')

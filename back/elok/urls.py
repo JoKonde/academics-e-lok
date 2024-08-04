@@ -12,7 +12,7 @@ from django.conf.urls import handler404
 from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import render
-
+from rental.views import *
 def page_not_found(request, exception):
     return HttpResponseNotFound(render(request, '404.html'))
 
@@ -27,7 +27,8 @@ router.register(r'payements', PayementViewSet)
 router.register(r'engins_loues', EnginLoueViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', index, name='index'),
+    path('urls', include(router.urls)),
     path('auth', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/refresh', TokenRefreshView.as_view(), name='token_refresh'),
      path('new-account', CreateUserView.as_view(), name='user_register'),

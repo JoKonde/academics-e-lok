@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { baseURL } from '../env';
+import { useNavigate } from 'react-router-dom';
 
 
   
@@ -18,7 +19,7 @@ const SignUpModal = () => {
   const [role, setRole] = useState("");
   const [middlename, setMiddlename] = useState("");
   const [verifBtn, setVerifBtn] = useState(false);
-
+  const navigate =useNavigate();
 
   const createAccount = () => {
     setErrors([]);
@@ -36,7 +37,9 @@ const SignUpModal = () => {
     })
 
       .then((res) => {
-        console.log(res);
+         setMsg("Fait");
+         navigate("/#signin-modal")
+         setVerif(true);
         setVerifBtn(false);
       })
       .catch((error) => {

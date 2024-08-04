@@ -10,7 +10,7 @@ const PersonalInfoPage = () => {
       {/* Breadcrumb */}
       <nav className="mb-4 pt-md-3" aria-label="Breadcrumb">
         <ol className="breadcrumb breadcrumb-light">
-          <li className="breadcrumb-item"><Link to="/">Acceuil</Link></li>
+          <li className="breadcrumb-item"><p onClick={()=>window.location.href="/"}>Acceuil</p></li>
           <li className="breadcrumb-item"><Link to="/acceuil">Espace de travail</Link></li>
           <li className="breadcrumb-item active" aria-current="page">Info</li>
         </ol>
